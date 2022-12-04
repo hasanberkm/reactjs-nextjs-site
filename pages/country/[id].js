@@ -6,20 +6,22 @@ import { useRouter } from "next/router";
 import Layout from "../../components/Layout" //Master Page
 import unfetch from 'isomorphic-unfetch'; //Fetch
 import { useEffect, useState } from "react";
+import PreLoader from "../../components/PreLoader"; //PreLoader
 
 export default () => {
     const router = useRouter().query;
     const id = router.id; //Get Country Code from URL Param
 
     const [country, setCountry] = useState([]); //Country Data
-    const [preLoader, setPreLoader] = useState(true); //Preloader
+    const [isLoading, setIsLoading] = useState(true); //Preloader
+    
     useEffect(() => {
         async function fetchData() {
             const data = await unfetch("https://restcountries.com/v3.1/alpha/" + id);
             const json = await data.json();
 
             setCountry(json);
-            setPreLoader(false)
+            setIsLoading(false)
         }
 
         if (id) {
@@ -28,12 +30,8 @@ export default () => {
 
     }, [id])
 
-    if (preLoader) {
-        return (
-            <div style={{ left: "45%", top: "50%", position: 'absolute' }}>
-                <p className="fw-bold h1">Yükleniyor</p>
-            </div>
-        )
+    if (isLoading) {
+        return <PreLoader />
     } else {
         if (country.length > 0) {
             let capitals = [], languages = [], currencies = [];
@@ -88,15 +86,15 @@ export default () => {
                     </div>
                 </Layout >
             )
-        } else{
+        } else {
             return (
                 <Layout>
                     <Head>
                         <title>Ülke Bulunamadı</title>
                     </Head>
-    
+
                     <div className="container">
-                        <h1>Bir hata oluştu.</h1>    
+                        <h1>Bir hata oluştu.</h1>
                         <p>Ülke bulunamadı. Tıkladığınız link hatalı olabilir ya da sayfa kaldırılmış olabilir.</p>
                     </div>
                 </Layout >

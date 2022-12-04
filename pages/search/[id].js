@@ -1,11 +1,12 @@
 //Libraries
 import Head from "next/head" //Next [Header]
-import { useRouter } from "next/router";
+import { useRouter } from "next/router"; //Router
+import { useEffect, useState } from "react"; //React
 
 //Components
 import Layout from "../../components/Layout" //Master Page
 import unfetch from 'isomorphic-unfetch'; //Fetch
-import { useEffect, useState } from "react";
+import PreLoader from "../../components/PreLoader"; //PreLoader
 
 export default () => {
     const router = useRouter().query;
@@ -29,11 +30,7 @@ export default () => {
     }, [id])
 
     if (preLoader) {
-        return (
-            <div style={{ left: "45%", top: "50%", position: 'absolute' }}>
-                <p className="fw-bold h1">Yükleniyor</p>
-            </div>
-        )
+        return <PreLoader />
     } else {
         if (country.length > 0) {
             let capitals = [], languages = [], currencies = [];

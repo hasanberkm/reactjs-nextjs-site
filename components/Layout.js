@@ -1,10 +1,10 @@
 //Components
-import Head from "next/head";
+import Head from "next/head"; //Header
 import Navigation from "./Navigation"; //NavBar
 
 export default function Layout({ children }) {
     return (
-        <div>    
+        <div>
             <Navigation />
             <Head>
                 <title>Next.js Deneme</title>
