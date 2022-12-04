@@ -21,7 +21,7 @@ export default () => {
                     </ul>
                     <div className="d-flex" role="search">
                         <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" onChange={text => setSearch(text.target.value)} />
-                        <Link  href="/search/[id]" as={"search/"+search} className="btn btn-outline-success">Search</Link>
+                        <Link href={"/search/[id]"} as={"/search/"+search} className="btn btn-outline-success">Search</Link>
                     </div>
                 </div>
             </div>
