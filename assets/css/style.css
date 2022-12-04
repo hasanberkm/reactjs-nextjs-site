@@ -1,0 +1,13 @@
+body {
+    background-color: #dbdbdb;
+}
+
+nav {  background-color: #ccc; }
+
+nav a {
+    color: red;
+    margin-right: 10px;
+    text-decoration: none;
+}
+
+.flag{ width: 100%; height: 200px }
